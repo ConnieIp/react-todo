@@ -1,5 +1,6 @@
 const initialState = {
-    todos:[]
+    todos:[],
+    showActiveOnly:false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -24,6 +25,10 @@ export default (state = initialState, { type, payload }) => {
         return todoItem
       }
     })}
+    case "GETACTIVETODO":
+      return {...state,todos:[...payload]}
+    case "CHANGECHECKBOX":
+      return {...state,showActiveOnly:!state.showActiveOnly}
   default:
     return state
   }

@@ -5,9 +5,11 @@ export default class Todos extends Component {
   componentWillMount(){
     this.props.getAllTodo();
   }
+  clickCheckBox=()=>{
+    this.props.showActiveOnly?this.props.getAllTodo():this.props.getActiveTodo()
+    this.props.changeCheckBox()
+  }
   render() {
-    console.log("render")
-    console.log(this.props.todos)
     return (
       <div>
         {this.props.todos.map((todo, i) => {
@@ -24,6 +26,7 @@ export default class Todos extends Component {
         </li>
         }
         )}
+        <input type='checkbox' onChange={this.clickCheckBox}/><span>Active Todo</span>
       </div>
     )
   }

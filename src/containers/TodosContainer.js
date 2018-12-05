@@ -4,20 +4,36 @@ import Todos from "../components/Todos.js"
 
 
 const mapStateToProps = state => ({
-  todos: state.todos
+  todos: state.todos,
+  showActiveOnly:state.showActiveOnly
 });
 
 const mapDispatchToProps = dispatch =>({
   getAllTodo:()=>{
     fetch("http://localhost:8080/api/todos", {
             method: 'GET', 
-            headers: new Headers({'Content-Type': 'application/json'}), 
             mode: 'cors',
         }).then(res => res.json())
         .then(res => {
           console.log(res)  
           dispatch({
                 type:"GETALLTODO",
+                payload: res._embedded.todos.map(todoItem=>({
+                  id:todoItem.id,
+                  content:todoItem.content,
+                  status:todoItem.status}))
+              })
+        })
+  },
+  getActiveTodo:()=>{
+    fetch("http://localhost:8080/api/todos/search/statusOfTodos?status=active", {
+            method: 'GET', 
+            mode: 'cors',
+        }).then(res => res.json())
+        .then(res => {
+          console.log(res)  
+          dispatch({
+                type:"GETACTIVETODO",
                 payload: res._embedded.todos.map(todoItem=>({
                   id:todoItem.id,
                   content:todoItem.content,
@@ -59,7 +75,13 @@ const mapDispatchToProps = dispatch =>({
    return dispatch({
     type: "CHANGETOCOMPLETED",
     payload: res.id
-  })})
+  })}),
+  changeCheckBox:()=>dispatch({
+    type:"CHANGECHECKBOX"
+  }),
+  resetCheckBox:()=>dispatch({
+    type:"RESETCHECKBOX"
+  })
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todos);
