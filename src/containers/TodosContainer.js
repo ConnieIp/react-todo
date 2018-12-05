@@ -7,4 +7,15 @@ const mapStateToProps = state => ({
   todos: state.todos
 });
 
-export default connect(mapStateToProps)(Todos);
+const mapDispatchToProps = dispatch =>({
+  changeToActive:(id)=>dispatch({
+      type: "CHANGETOACTIVE",
+      payload: id
+  }),
+  changeToCompleted:(id)=>dispatch({
+    type: "CHANGETOCOMPLETED",
+    payload: id
+})
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Todos);
