@@ -16,7 +16,7 @@ class TodoList extends Component {
   render() {
     return (
       <div>
-        <TodoInput onNewTodoAdded={this.addNewTodo}/>
+        <TodoInput/>
         <Todos todos={this.props.todos}/>
       </div>
     )
