@@ -4,7 +4,8 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-
+  case "GETALLTODO":
+    return { ...state, todos:[...payload]}
   case "ADDTODO":
     return { ...state, todos:state.todos.concat(payload)}
   case "CHANGETOACTIVE":
