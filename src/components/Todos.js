@@ -9,12 +9,12 @@ export default class Todos extends Component {
           return <li 
         onClick={()=>{
           if(todo.status=="active"){
-            this.props.changeToCompleted(todo.id)
+            this.props.changeToCompleted(todo.id,todo.content)
           }else{
-            this.props.changeToActive(todo.id)
+            this.props.changeToActive(todo.id,todo.content)
           }}} 
         key={i}
-        style={todo.status=="completed"?{textDecoration:'line-through'}:{}}
+        style={{textDecoration:todo.status=="completed"?'line-through':'none'}}
         >{todo.content}
         </li>
         }

@@ -8,14 +8,41 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>({
-  changeToActive:(id)=>dispatch({
-      type: "CHANGETOACTIVE",
-      payload: id
+  changeToActive:(id,content)=>{
+    fetch("http://localhost:8080/api/todos/"+id, {
+  mode: 'cors',
+  method: 'PUT', 
+  body: JSON.stringify({
+    "content" : content,
+    "status" : "active"
   }),
-  changeToCompleted:(id)=>dispatch({
-    type: "CHANGETOCOMPLETED",
-    payload: id
+  headers: new Headers({ 'Content-Type': 'application/json'})
 })
+   .then(res=>res.json())
+   .then((res)=>{
+    console.log(res) 
+    return dispatch({
+    type: "CHANGETOACTIVE",
+    payload: id
+  })})
+},
+  changeToCompleted:(id,content)=>
+  fetch("http://localhost:8080/api/todos/"+id, {
+  mode: 'cors',
+  method: 'PUT', 
+  body: JSON.stringify({
+    "content" : content,
+    "status" : "completed"
+  }),
+  headers: new Headers({ 'Content-Type': 'application/json'})
+})
+   .then(res=>res.json())
+   .then((res)=>{
+   console.log(res)
+   return dispatch({
+    type: "CHANGETOCOMPLETED",
+    payload: res.id
+  })})
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Todos);
