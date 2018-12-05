@@ -4,12 +4,11 @@ import App from './components/App';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import reducer from './reducer';
-import TodoList from './components/TodoList.js'
 
 const store = createStore(reducer);
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
     <Provider store={store}>
-        <TodoList/>
+        <App/>
     </Provider>, document.getElementById('root'));
