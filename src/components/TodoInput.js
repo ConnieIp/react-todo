@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 class TodoInput extends Component {
-  addNewTodo = () => {
+  onAdded = () => {
     const {input} = this.refs
-    this.props.dispatch({
-      type:"ADDTODO",
-      payload:input.value
-    })
+    this.props.addNewTodo(input.value)
     input.value = ''
   }
   render() {
     return (
       <div>
         <input ref="input"/>
-        <button onClick={this.addNewTodo}>add</button>
+        <button onClick={this.onAdded}>add</button>
       </div>
     )
   }
 }
 
+const mapDispatchToProps=dispatch=>({
+  addNewTodo:newTodo=>{
+    dispatch({
+    type:"ADDTODO",
+    payload:newTodo
+  })
+}
+})
 
-export default connect()(TodoInput);
+export default connect(null, mapDispatchToProps)(TodoInput);
