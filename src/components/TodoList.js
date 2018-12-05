@@ -3,7 +3,7 @@ import TodoInput from './TodoInput'
 import Todos from './Todos'
 import { connect } from "react-redux";
 
-class TodoList extends Component {
+export default class TodoList extends Component {
   render() {
     return (
       <div>
@@ -13,9 +13,3 @@ class TodoList extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  todos: state.todos
-});
-
-export default connect(mapStateToProps)(TodoList);

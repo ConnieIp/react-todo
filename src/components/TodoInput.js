@@ -19,8 +19,5 @@ class TodoInput extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  todos: state.todos
-});
 
-export default connect(mapStateToProps)(TodoInput);
+export default connect()(TodoInput);
