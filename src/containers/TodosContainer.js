@@ -78,9 +78,6 @@ const mapDispatchToProps = dispatch =>({
   })}),
   changeCheckBox:()=>dispatch({
     type:"CHANGECHECKBOX"
-  }),
-  resetCheckBox:()=>dispatch({
-    type:"RESETCHECKBOX"
   })
 })
 
